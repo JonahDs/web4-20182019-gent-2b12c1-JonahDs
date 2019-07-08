@@ -1,0 +1,56 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav
+    #drawer
+    class="sidenav"
+    fixedInViewport="true"
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="!(isHandset$ | async)"
+  >
+    <mat-toolbar>Menu</mat-toolbar>
+
+    <div *ngIf="categories$ | async as categorie; else loading">
+      <button mat-button [matMenuTriggerFor]="categories">categories</button>
+
+      <!-- menu and buttons for the categories (this seems to work fine) -->
+      <mat-menu #categories="matMenu">
+        <button
+          *ngFor="let cat of categorie"
+          mat-menu-item
+          (mouseover)="(subcategories(cat))"
+          [matMenuTriggerFor]="fcategorieNames"
+        >
+          {{ cat.name }}
+        </button>
+      </mat-menu>
+
+      <mat-menu #fcategorieNames="matMenu">
+        <button
+        *ngFor="let subcat of subcategoriesList"
+        (click)="(getProductName(subcat.scategorieNaam))"
+        mat-menu-item 
+        >
+          {{subcat.scategorieNaam}}
+        </button>
+      </mat-menu>
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async"
+      >
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span>AngularProject</span>
+    </mat-toolbar>
+    <ng-content></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+<ng-template #loading
+  ><mat-spinner style="margin-left: 20px;"></mat-spinner
+></ng-template>
