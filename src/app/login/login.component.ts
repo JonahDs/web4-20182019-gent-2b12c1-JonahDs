@@ -1,15 +1,15 @@
-import { Component, OnInit, Input } from "@angular/core";
-import { Router } from "@angular/router";
-import { LoginService } from "../services/login.service";
-import { FormsModule } from "@angular/forms";
-import { HttpErrorResponse } from "@angular/common/http";
+import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
+import { LoginService } from '../services/login.service';
+import { FormsModule } from '@angular/forms';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
-  selector: "app-login",
-  templateUrl: "./login.component.html",
-  styleUrls: ["./login.component.sass"]
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.sass']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   model: any = {};
   errorMessage: string;
 
@@ -19,13 +19,13 @@ export class LoginComponent {
   constructor(private router: Router, private LoginService: LoginService) {}
 
   ngOnInit() {
-    sessionStorage.removeItem("LoginCredential");
+    sessionStorage.removeItem('LoginCredential');
     sessionStorage.clear();
   }
 
   login() {
     if (!this.LoginCredential || !this.Password) {
-      this.errorMessage = "LoginCredential or Password is left blank";
+      this.errorMessage = 'LoginCredential or Password is left blank';
       return;
     }
 
@@ -36,10 +36,10 @@ export class LoginComponent {
             this.router.navigateByUrl(this.LoginService.redirectUrl);
             this.LoginService.redirectUrl = undefined;
           } else {
-            this.router.navigate(["/Dashboard"]);
+            this.router.navigate(['/Dashboard']);
           }
         } else {
-          this.errorMessage = "Could not login";
+          this.errorMessage = 'Could not login';
         }
       },
       (err: HttpErrorResponse) => {

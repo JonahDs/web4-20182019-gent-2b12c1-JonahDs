@@ -1,18 +1,18 @@
-import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { HttpHeaders } from "@angular/common/http";
-import { from, Observable, BehaviorSubject } from "rxjs";
-import { map } from "rxjs/operators";
-import { Register } from "../classes/register";
-import { environment } from "src/environments/environment";
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
+import { from, Observable, BehaviorSubject } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { Register } from '../classes/register';
+import { environment } from 'src/environments/environment';
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class LoginService {
-  private readonly _tokenKey = "currentUser";
+  private readonly _tokenKey = 'currentUser';
   private _user$: BehaviorSubject<string>;
   public redirectUrl: string;
-  
+
   constructor(private http: HttpClient) {
     let parsedToken = parseJwt(localStorage.getItem(this._tokenKey));
     if (parsedToken) {
@@ -28,18 +28,18 @@ export class LoginService {
     );
   }
 
-  login(LoginCredential: string, password: string): Observable<boolean> {
+  login(loginCredential: string, password: string): Observable<boolean> {
     return this.http
       .post(
         `${environment.apiUrl}/account`,
-        { LoginCredential: LoginCredential, password },
-        { responseType: "text" }
+        { loginCredential, password },
+        { responseType: 'text' }
       )
       .pipe(
         map((token: any) => {
           if (token) {
             localStorage.setItem(this._tokenKey, token);
-            this._user$.next(LoginCredential);
+            this._user$.next(loginCredential);
             return true;
           } else {
             return false;
@@ -51,10 +51,9 @@ export class LoginService {
   register(
     firstname: string,
     lastname: string,
-    username:string,
-    email: string, 
-    Password: string
-   
+    username: string,
+    email: string,
+    password: string
   ): Observable<boolean> {
     return this.http
       .post(
@@ -64,10 +63,10 @@ export class LoginService {
           firstname,
           lastname,
           username,
-          Password,
-          PasswordConfirmation: Password
+          password,
+          PasswordConfirmation: password
         },
-        { responseType: "text" }
+        { responseType: 'text' }
       )
       .pipe(
         map((token: any) => {
@@ -84,7 +83,7 @@ export class LoginService {
 
   logout() {
     if (this._user$.getValue()) {
-      localStorage.removeItem("currentUser");
+      localStorage.removeItem('currentUser');
       this._user$.next(null);
     }
   }
@@ -96,20 +95,18 @@ export class LoginService {
         params: { email }
       }
     );
-  };
+  }
 
   get user$(): BehaviorSubject<string> {
     return this._user$;
   }
 }
 
-
-
 function parseJwt(token) {
   if (!token) {
     return null;
   }
-  const base64Token = token.split(".")[1];
-  const base64 = base64Token.replace(/-/g, "+").replace(/_/g, "/");
+  const base64Token = token.split('.')[1];
+  const base64 = base64Token.replace(/-/g, '+').replace(/_/g, '/');
   return JSON.parse(window.atob(base64));
 }

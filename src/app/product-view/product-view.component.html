@@ -1,0 +1,38 @@
+<div *ngIf="loader">
+  <div class="header">
+    <h1>{{ productDetail.productName }}</h1>
+  </div>
+
+  <div class="detail-body">
+    <div class="details-column">
+      <ngb-carousel>
+        <ng-template ngbSlide *ngFor="let img of images">
+          <div class="carousel-caption"></div>
+          <a href="" target="_blank" rel="nofollow noopener noreferrer">
+            <div class="picsum-img-wrapper">
+              <img [src]="img" alt="" />
+            </div>
+          </a>
+        </ng-template>
+      </ngb-carousel>
+
+      <div>
+        {{ productDetail.fullText }}
+      </div>
+
+      <div>
+        {{ productDetail.productSpecs }}
+      </div>
+    </div>
+
+    <div class="details-column">
+      <div class="details-price-section">
+        <p>{{ productDetail.productPrice }}</p>
+        <div class="details-buy-button">
+            <button (click)="addToCart(productDetail.productName)">Add To Cart</button>
+          </div>
+      </div>
+      
+    </div>
+  </div>
+</div>

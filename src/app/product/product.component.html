@@ -1,9 +1,28 @@
-<mat-list>
-  <mat-list-item 
-  *ngFor="let prod of products$ | async"
-  >
-    <mat-card class="product-wrapper">{{prod.productName}}</mat-card>
-    <p></p>
-  </mat-list-item>
-
-</mat-list>
+<mat-card *ngFor="let prod of products$ | async" class="product-card">
+  <mat-card-header>
+    <mat-card-title>
+      {{ prod.productName }}
+    </mat-card-title>
+    <mat-card-subtitle>
+      {{ prod.subCategorieName }}
+    </mat-card-subtitle>
+  </mat-card-header>
+  <div class="product-image">
+      <img
+      class='image'
+      src={{prod.productImage}}
+    />
+  </div>
+  
+  <mat-card-content>
+    <div class="product-description">
+      {{ prod.productDescription }}
+    </div>
+    <button (click)="redirect(prod)">Meer... </button>
+    
+  </mat-card-content>
+  <mat-card-footer>
+    <div class="product-price">&euro; {{ prod.productPrice }}</div>
+    <div class="shopping-basket"></div>
+  </mat-card-footer>
+</mat-card>

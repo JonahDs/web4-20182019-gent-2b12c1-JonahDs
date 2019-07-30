@@ -14,6 +14,8 @@ import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, Mat
 import {MatMenuModule} from '@angular/material/menu';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { ProductComponent } from './product/product.component';
+import { ProductViewComponent } from './product-view/product-view.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,8 @@ import { ProductComponent } from './product/product.component';
     AppComponent,
     NavigationComponent,
     ProductComponent,
-    
+    ProductViewComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -40,8 +43,9 @@ import { ProductComponent } from './product/product.component';
     MatListModule,
     MatMenuModule,
     MatProgressSpinnerModule,
-    MatCardModule
-    
+    MatCardModule,
+    MatIconModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

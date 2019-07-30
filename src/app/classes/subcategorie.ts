@@ -1,11 +1,14 @@
 export class Subcategorie {
-  constructor(private sCategorieId: number,private sCategorieNaam: string) {}
+  constructor(
+    private _sCategorieId: number,
+    private _sCategorieName: string
+    ) {}
 
   static fromJSON(json: any): Subcategorie {
-    return new Subcategorie(json.sCategorieId,json.sCategorieNaam);
+    return new Subcategorie(json.sCategorieId, json.sCategorieName);
   }
 
   get scategorieNaam(): string {
-    return this.sCategorieNaam;
+    return this._sCategorieName;
   }
 }

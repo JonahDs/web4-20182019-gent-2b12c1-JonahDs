@@ -1,0 +1,15 @@
+.detail-body:after {
+  display:table;
+  content: "";
+  clear:both;
+}
+
+.details-column {
+    width: 50%;
+    float:left;
+  }
+
+.details-price-section{
+  border: 1px solid #e6e6e6;
+  border-radius: .5em
+}
