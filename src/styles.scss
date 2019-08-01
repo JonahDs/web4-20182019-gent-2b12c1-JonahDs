@@ -1,7 +1,6 @@
-
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
-@import '~@angular/material/theming';
+@import "~@angular/material/theming";
 // Plus imports for other components in your app.
 
 // Include the common styles for Angular Material. We include this here so that you only
@@ -19,7 +18,11 @@ $AngularProject-accent: mat-palette($mat-pink, A200, A100, A400);
 $AngularProject-warn: mat-palette($mat-red);
 
 // Create the theme object (a Sass map containing all of the palettes).
-$AngularProject-theme: mat-light-theme($AngularProject-primary, $AngularProject-accent, $AngularProject-warn);
+$AngularProject-theme: mat-light-theme(
+  $AngularProject-primary,
+  $AngularProject-accent,
+  $AngularProject-warn
+);
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
@@ -28,5 +31,43 @@ $AngularProject-theme: mat-light-theme($AngularProject-primary, $AngularProject-
 
 /* You can add global styles to this file, and also import other style files */
 @import "../node_modules/bootstrap/scss/bootstrap.scss";
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.shopping-basket {
+    &[data-quantity]{
+        &:before{
+            position: absolute;
+                top: 7px;
+                right: 3px;
+                padding: 0 .25rem;
+                text-align: center;
+                content: attr(data-quantity);
+                z-index: 1;
+                display: flex;
+                min-width: 1.5rem;
+                height: 1.5rem;
+                font-size: .85714rem;
+                line-height: inherit;
+                color: #0000a4;
+                border-radius: .75rem;
+                background-color: #ffe900;
+                align-items: center;
+                justify-content: center;
+        }
+    }
+  background-size: cover;
+  background-repeat: no-repeat center;
+  background-image: url("/assets/img/icons/shopping-cart.svg");
+  width: 30px;
+  height: 30px;
+  &:hover {
+    background-image: url("/assets/img/icons/shopping-cart-active.svg");
+  }
+}

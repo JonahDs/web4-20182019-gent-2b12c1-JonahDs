@@ -38,14 +38,4 @@
     position: relative;
   }
 
-  .shopping-basket {
-    background-size: cover;
-    background-repeat: no-repeat center;
-    background-image: url("../../assets/img/icons/shopping-cart.svg");
-    width: 30px;
-    height: 30px;
-    &:hover {
-      background-image: url("../../assets/img/icons/shopping-cart-active.svg");
-    }
-  }
 }

@@ -15,3 +15,15 @@
   top: 0;
   z-index: 1;
 }
+
+.fill-gap {
+  flex: 1 1 auto;
+}
+
+.user-name:hover {
+  cursor: pointer;
+}
+
+button {
+  outline: none;
+}

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject, Observable, Observer } from 'rxjs';
-import { nextContext } from '@angular/core/src/render3';
+import { ProductDetail } from '../classes/productClasses/product-detail';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +9,8 @@ export class DataInterchangeService {
   private inputSource = new BehaviorSubject('Asus');
   input = this.inputSource.asObservable();
 
-  private cart$ = new Subject<string>();
+  public cart$ = new Subject<ProductDetail>();
+  public cartItems = Array<ProductDetail>();
 
   constructor() {}
 
@@ -17,7 +18,8 @@ export class DataInterchangeService {
     this.inputSource.next(message);
   }
 
-  addToCart(productnaam: string) {
-    this.cart$.next(productnaam);
+  addToCart(product: ProductDetail) {
+    this.cart$.next(product);
+    this.cartItems.push(product);
   }
 }

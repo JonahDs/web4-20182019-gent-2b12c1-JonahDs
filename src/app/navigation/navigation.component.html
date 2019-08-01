@@ -12,7 +12,6 @@
     <div *ngIf="categories$ | async as categorie; else loading">
       <button mat-button [matMenuTriggerFor]="categories">categories</button>
 
-      <!-- menu and buttons for the categories (this seems to work fine) -->
       <mat-menu #categories="matMenu">
         <button
           *ngFor="let cat of categorie"
@@ -46,11 +45,27 @@
       >
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>AngularProject</span>
+      <span (click)="this._router.navigate(['/product'])">AngularProject</span>
+      <span class="fill-gap"></span>
+      <ng-container *ngIf="(_loggedInUser$ | async) as user; else notLoggedIn">
+        <span [matMenuTriggerFor]="userOptions" class="user-name">{{user}}</span>
+        <mat-menu #userOptions="matMenu">
+          <button mat-menu-item (click)="logout()">Logout</button>
+        </mat-menu>
+        <div class="shopping-basket" [attr.data-quantity]="isShoppingbag ? itemCounter: null"
+        (click)="this._router.navigate(['/basket'])"></div>
+
+      </ng-container>
     </mat-toolbar>
     <ng-content></ng-content>
   </mat-sidenav-content>
 </mat-sidenav-container>
+
 <ng-template #loading
   ><mat-spinner style="margin-left: 20px;"></mat-spinner
 ></ng-template>
+
+<ng-template #notLoggedIn>
+  <button mat-button (click)="this._router.navigate(['/login'])">Login</button>
+  <button mat-button (click)="this._router.navigate(['/register'])">Register</button>
+</ng-template>

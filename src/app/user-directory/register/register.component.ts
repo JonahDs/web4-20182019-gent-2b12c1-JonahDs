@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginService } from '../services/login.service';
-import { Register } from '../classes/register';
+import { LoginService } from '../../services/login.service';
+import { Register } from '../../classes/register';
 import { Observable } from 'rxjs';
 import {
   NgForm,

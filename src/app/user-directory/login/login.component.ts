@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoginService } from '../services/login.service';
+import { LoginService } from '../../services/login.service';
 import { FormsModule } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 
@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
             this.router.navigateByUrl(this.LoginService.redirectUrl);
             this.LoginService.redirectUrl = undefined;
           } else {
-            this.router.navigate(['/Dashboard']);
+            this.router.navigate(['/product']);
           }
         } else {
           this.errorMessage = 'Could not login';

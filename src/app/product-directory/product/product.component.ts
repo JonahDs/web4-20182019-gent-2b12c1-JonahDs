@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductService } from '../services/product.service';
+import { ProductService } from '../../services/product.service';
 import { Observable, Observer } from 'rxjs';
-import { DataInterchangeService } from '../services/data-interchange.service';
-import { Product } from '../classes/productClasses/product';
+import { DataInterchangeService } from '../../services/data-interchange.service';
+import { Product } from '../../classes/productClasses/product';
 import { Router } from '@angular/router';
 
 @Component({

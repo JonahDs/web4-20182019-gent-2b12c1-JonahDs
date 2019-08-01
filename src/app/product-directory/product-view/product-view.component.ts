@@ -1,12 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Observable } from 'rxjs';
-import { ProductDetail } from '../classes/productClasses/product-detail';
-import { ProductService } from '../services/product.service';
+import { ProductDetail } from '../../classes/productClasses/product-detail';
+import { ProductService } from '../../services/product.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { map, finalize } from 'rxjs/operators';
-import { Product } from '../classes/productClasses/product';
+import { finalize } from 'rxjs/operators';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
-import { DataInterchangeService } from '../services/data-interchange.service';
+import { DataInterchangeService } from '../../services/data-interchange.service';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-product-view',
@@ -27,7 +26,9 @@ export class ProductViewComponent implements OnInit {
     private _productService: ProductService,
     private _dataInterchange: DataInterchangeService,
     private activatedRoute: ActivatedRoute,
-    private config: NgbCarouselConfig
+    private config: NgbCarouselConfig,
+    private loginService: LoginService,
+    private router: Router
   ) {
     this.config.interval = 0;
   }
@@ -46,7 +47,11 @@ export class ProductViewComponent implements OnInit {
       });
   }
 
-  private addToCart(productNaam: string): void {
-    this._dataInterchange.addToCart(productNaam);
+  private addToCart(product: ProductDetail): void {
+    if (this.loginService.user$.getValue()) {
+      this._dataInterchange.addToCart(product);
+    } else {
+      this.router.navigate(['/login']);
+    }
   }
 }
