@@ -9,23 +9,23 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { ProductModule } from './product-directory/product.module';
 import { MaterialModule } from './material/material.module';
 import { UserModule } from './user-directory/user.module';
-
-
+import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 
 @NgModule({
   declarations: [
     DashboardComponent,
     AppComponent,
     NavigationComponent,
+    PagenotfoundComponent,
   ],
   imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
     ProductModule,
     MaterialModule,
-    UserModule
+    UserModule,
+    BrowserModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

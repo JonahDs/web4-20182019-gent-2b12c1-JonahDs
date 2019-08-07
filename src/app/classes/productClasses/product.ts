@@ -6,6 +6,7 @@ export class Product {
     private _price: number,
     private _image: string,
     private _subCategorie: string,
+    private _ratings: any
   ) {}
 
   static fromJSON(json: any): Product {
@@ -15,7 +16,8 @@ export class Product {
       json.productDescription,
       json.price,
       json.productImage,
-      json.subCategorie.scategorieName
+      json.subCategorie.scategorieName,
+      json.ratings.map(t => t.rating)
     );
   }
 

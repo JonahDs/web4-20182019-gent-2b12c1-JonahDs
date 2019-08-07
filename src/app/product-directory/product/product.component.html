@@ -1,4 +1,4 @@
-
+<ng-container *ngIf="_loader; else emptyPage">
   <mat-card *ngFor="let prod of _products" class="product-card">
     <mat-card-header>
       <mat-card-title>
@@ -22,14 +22,22 @@
       <button (click)="redirect(prod)">Meer... </button>
       
     </mat-card-content>
+    <ngb-rating [(rate)]="prod._ratings" [starTemplate]="ngbHearth" [readonly]="false" max="5"></ngb-rating>
+<p>{{prod._ratings}}</p>
     <mat-card-footer>
       <div class="product-price">&euro; {{ prod.productPrice }}</div>
     </mat-card-footer>
   </mat-card>
+</ng-container>
+ 
+<ng-template #ngbHearth let-fill="fill">
+    <span class="star" [class.full]="fill === 100">
+        <span class="half" [style.width.%]="fill">&#10084;</span>&#10084;
+      </span>
+</ng-template>
 
 
-
-<ng-template #startPage>
+<ng-template #emptyPage>
   <div>
     <p>Loading</p>
   </div>
