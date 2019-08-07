@@ -1,16 +1,16 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ProductDetail } from '../../classes/productClasses/product-detail';
-import { ProductService } from '../../services/product.service';
-import { Router, ActivatedRoute } from '@angular/router';
-import { finalize } from 'rxjs/operators';
-import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
-import { DataInterchangeService } from '../../services/data-interchange.service';
-import { LoginService } from 'src/app/services/login.service';
+import { Component, OnInit, OnDestroy } from "@angular/core";
+import { ProductDetail } from "../../classes/productClasses/product-detail";
+import { ProductService } from "../../services/product.service";
+import { Router, ActivatedRoute } from "@angular/router";
+import { finalize } from "rxjs/operators";
+import { NgbCarouselConfig } from "@ng-bootstrap/ng-bootstrap";
+import { DataInterchangeService } from "../../services/data-interchange.service";
+import { LoginService } from "src/app/services/login.service";
 
 @Component({
-  selector: 'app-product-view',
-  templateUrl: './product-view.component.html',
-  styleUrls: ['./product-view.component.scss'],
+  selector: "app-product-view",
+  templateUrl: "./product-view.component.html",
+  styleUrls: ["./product-view.component.scss"],
   providers: [NgbCarouselConfig]
 })
 export class ProductViewComponent implements OnInit {
@@ -34,7 +34,7 @@ export class ProductViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._productId = this.activatedRoute.snapshot.paramMap.get('id');
+    this._productId = this.activatedRoute.snapshot.paramMap.get("id");
     this._productService
       .productDetails$(this._productId)
       .pipe(
@@ -51,7 +51,7 @@ export class ProductViewComponent implements OnInit {
     if (this.loginService.user$.getValue()) {
       this._dataInterchange.addToCart(product);
     } else {
-      this.router.navigate(['/login']);
+      this.router.navigate(["/login"]);
     }
   }
 }

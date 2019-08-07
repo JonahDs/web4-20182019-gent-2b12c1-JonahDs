@@ -56,6 +56,7 @@ export class NavigationComponent {
   }
 
   getProductName(name: string) {
+    this._router.navigate([`/product/${name}`]);
     this._dataInterchange.changeOnInput(name);
   }
 }

@@ -19,6 +19,16 @@ export class Product {
     );
   }
 
+  toJSON(): any {
+    return {
+      id: this._productId,
+      productName: this.productName,
+      productDescription: this.productDescription,
+      price: this.productPrice,
+      productImage: this._image
+    };
+  }
+
   get productId(): number {
     return this._productId;
   }

@@ -3,7 +3,7 @@ export class ProductDetail {
     public productdetailId: number,
     public productName: string,
     public productPrice: number,
-    public images: string[],
+    public images: any[],
     public fullText: string,
     public productSpecs: number
   ) {}

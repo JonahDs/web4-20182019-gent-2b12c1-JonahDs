@@ -1,16 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { LoginService } from '../../services/login.service';
-import { Register } from '../../classes/register';
-import { Observable } from 'rxjs';
-import {
-  NgForm,
-  FormBuilder,
-  FormGroup,
-  Validators,
-  FormControl
-} from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Register } from '../../classes/register';
+import { LoginService } from '../../services/login.service';
 
 @Component({
   selector: 'app-register',
@@ -34,13 +27,13 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
     this.registerform = this.formbuilder.group(
       {
-        Username: ['', [Validators.required]],
         Firstname: ['', [Validators.required]],
         Lastname: ['', [Validators.required]],
+        Username: ['', [Validators.required]],
+        Email: ['', [Validators.required, Validators.email]],
         Password: ['',
           [Validators.required, Validators.minLength(6), Validators.pattern('(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{6,15})$')]],
         ConfirmPassword: ['', [Validators.required]],
-        Email: ['', [Validators.required, Validators.email]]
       },
       {
         validator: this.MustMatch('Password', 'ConfirmPassword')

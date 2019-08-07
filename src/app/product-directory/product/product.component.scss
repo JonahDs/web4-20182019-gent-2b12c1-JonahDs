@@ -5,6 +5,10 @@
   display: inline-block;
 
   .product-image {
+    width: 300px;
+    height: 300px;
+    display: flex;
+    margin-left: 17%;
     .image{
       margin: auto;
       max-width: 100%;

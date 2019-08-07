@@ -45,7 +45,7 @@
       >
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span (click)="this._router.navigate(['/product'])">AngularProject</span>
+      <span (click)="this._router.navigate(['/product/asus'])">AngularProject</span>
       <span class="fill-gap"></span>
       <ng-container *ngIf="(_loggedInUser$ | async) as user; else notLoggedIn">
         <span [matMenuTriggerFor]="userOptions" class="user-name">{{user}}</span>

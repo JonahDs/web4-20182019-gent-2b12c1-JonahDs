@@ -1,3 +1,83 @@
-<div *ngFor="let product of _products">
-  <p>{{product.productName}}</p>
+<div class="title">
+  <h1>shopping bag</h1>
 </div>
+<ng-container *ngIf="!checkList(); else emptyCart">
+  <div class="shopping-cart">
+    <div *ngFor="let product of _products; let i=index" class="shopping-cart__row">
+      <div class="product">
+        <div class="product-image">
+          <img src="{{ product.images[0].productImageLocation }}" />
+        </div>
+        <div class="product-details">
+          <div class="product-description">
+            <p>{{ product.productName }}</p>
+            <p>rating</p>
+          </div>
+        </div>
+        <div class="product-actions">
+          <div class="product-actions-border">
+            <div class="product-action-wrapper">
+
+              <div class="product-price">
+                <p>{{ product.productPrice * _amounts[i] }}</p>
+              </div>
+
+              <select
+                (change)="
+                  updateOrderAmount($event.target.value, i)"
+                class="select-box"
+              >
+                <option
+                  *ngFor="let i of orderableAmount(10)"
+                  value="{{ i + 1 }}"
+                  >{{ i + 1 }}</option
+                >
+              </select>
+
+              <div class="product__actions">
+                <button>Delete Item</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="filler"></div>
+  <div class="shopping-cart-overview">
+    <div class="total-wrapper">
+      <form action="">
+        <table class="totals">
+          <tbody>
+            <tr>
+              <td class="price-description">Total Articles</td>
+              <td class="price">{{ calculatePrice() }}</td>
+            </tr>
+            <tr>
+              <td class="price-description">Shopping Cost</td>
+              <td class="price">{{ calculateShipping() }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <table class="totals">
+          <tbody>
+            <tr class="bordered">
+              <td class="price-description">Total Cost</td>
+              <td class="price">{{ caculateTotal() }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </form>
+      <button (click)="sendOrder()" class="submit">Send order</button>
+    </div>
+  </div>
+</ng-container>
+
+<ng-template #emptyCart>
+  <p>There are no items in your cart currently.</p>
+</ng-template>
+
+<ng-template #calculatedPrice>
+  <p>{{ _productPrice }}</p>
+</ng-template>

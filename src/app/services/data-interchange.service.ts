@@ -6,7 +6,7 @@ import { ProductDetail } from '../classes/productClasses/product-detail';
   providedIn: 'root'
 })
 export class DataInterchangeService {
-  private inputSource = new BehaviorSubject('Asus');
+  private inputSource = new Subject();
   input = this.inputSource.asObservable();
 
   public cart$ = new Subject<ProductDetail>();
@@ -19,7 +19,7 @@ export class DataInterchangeService {
   }
 
   addToCart(product: ProductDetail) {
-    this.cart$.next(product);
-    this.cartItems.push(product);
+        this.cart$.next(product);
+        this.cartItems.push(product);
   }
 }
