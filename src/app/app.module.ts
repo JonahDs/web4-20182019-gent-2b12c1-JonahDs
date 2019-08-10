@@ -11,6 +11,7 @@ import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { ProductModule } from './product-directory/product.module';
 import { UserModule } from './user-directory/user.module';
 import { GestureConfig } from '@angular/material';
+import { httpInterceptorProviders } from './http-interceptors';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import { GestureConfig } from '@angular/material';
     BrowserAnimationsModule,
     AppRoutingModule,
   ],
-  providers: [ {provide: HAMMER_GESTURE_CONFIG, useClass: GestureConfig}],
+  providers: [ {provide: HAMMER_GESTURE_CONFIG, useClass: GestureConfig}, httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

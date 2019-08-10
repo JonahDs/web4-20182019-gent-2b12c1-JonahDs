@@ -44,14 +44,18 @@
     <mat-card-footer>
       <div class="product-price">&euro; {{ prod.productPrice }}</div>
     </mat-card-footer>
+
+    <ng-template #ngbHearth let-fill="fill">
+      <span (click)= "openDialog(prod)" class="star" [class.full]="fill === 100">
+        <span class="half" [style.width.%]="fill">&#10084;</span>&#10084;
+      </span>
+    </ng-template>
   </mat-card>
+
+
 </ng-container>
 
-<ng-template #ngbHearth let-fill="fill">
-  <span (click)= "openDialog()" class="star" [class.full]="fill === 100">
-    <span class="half" [style.width.%]="fill">&#10084;</span>&#10084;
-  </span>
-</ng-template>
+
 
 <ng-template #emptyPage>
   <div>

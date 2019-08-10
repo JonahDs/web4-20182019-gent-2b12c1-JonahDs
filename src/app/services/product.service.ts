@@ -1,14 +1,13 @@
-import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { Observable, Subject, of } from "rxjs";
-import { Product } from "../classes/productClasses/product";
-import { environment } from "src/environments/environment";
-import { catchError, map } from "rxjs/operators";
-import { ProductDetail } from "../classes/productClasses/product-detail";
-import { jsonpCallbackContext } from '@angular/common/http/src/module';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable, of, Subject } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
+import { Product } from '../classes/productClasses/product';
+import { ProductDetail } from '../classes/productClasses/product-detail';
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class ProductService {
   private loadingError$ = new Subject<string>();
@@ -33,11 +32,15 @@ export class ProductService {
           this.loadingError$.next(error.statusText);
           return of(null);
         }),
-        map(
-          (detail: any): ProductDetail => ProductDetail.fromJSON(detail)
-        )
+        map((detail: any): ProductDetail => ProductDetail.fromJSON(detail))
       );
   }
 
-  
+  rateProduct$(productid: number, rating: number) {
+    console.log(productid);
+    return this.http.put(
+      `${environment.apiUrl}/product/rate/${productid}/${rating}`,
+      {}
+    );
+  }
 }

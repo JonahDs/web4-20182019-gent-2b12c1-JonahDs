@@ -60,13 +60,14 @@ export class ProductComponent implements OnInit {
     this._store.dispatch(new Actions.FilterProducts(price));
   }
 
-  openDialog(): void {
+  openDialog(product: Product): void {
     const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
       width: '250px'
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      let local = result;
+      console.log(product.productId)
+      this._productService.rateProduct$(product.productId, result).subscribe();
     });
   }
 }

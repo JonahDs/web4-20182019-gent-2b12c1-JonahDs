@@ -96,6 +96,11 @@ export class LoginService {
     );
   }
 
+  get token(): string {
+    const token = localStorage.getItem(this._tokenKey);
+    return !!token? token: '';
+  }
+
   get user$(): BehaviorSubject<string> {
     return this._user$;
   }
@@ -105,7 +110,7 @@ function parseJwt(token) {
   if (!token) {
     return null;
   }
-  const base64Token = token.split('.')[1];
-  const base64 = base64Token.replace(/-/g, '+').replace(/_/g, '/');
+  const base64Url = token.split('.')[1];
+  const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
   return JSON.parse(window.atob(base64));
 }
