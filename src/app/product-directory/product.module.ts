@@ -1,11 +1,14 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProductComponent } from './product/product.component';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 import { MaterialModule } from '../material/material.module';
 import { ProductViewComponent } from './product-view/product-view.component';
-import { RouterModule, Routes } from '@angular/router';
+import { ProductComponent } from './product/product.component';
 import { ShoppingBasketComponent } from './shopping-basket/shopping-basket.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { PricePipe } from '../ngrx/pipes/price.pipe';
+import { StoreModule } from '@ngrx/store';
+import { filterReducer } from '../ngrx/reducers/filter.reducer';
+import { DialogOverviewExampleDialog } from './rating-dialog/dialog-overview';
 
 const routes: Routes = [
   {
@@ -27,11 +30,12 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [ProductComponent, ProductViewComponent, ShoppingBasketComponent],
+  declarations: [ProductComponent, ProductViewComponent, ShoppingBasketComponent, PricePipe, DialogOverviewExampleDialog],
   imports: [
     CommonModule,
     MaterialModule,
-    RouterModule.forChild(routes)
-  ]
+    RouterModule.forChild(routes),
+    StoreModule.forRoot({filter: filterReducer})
+  ], entryComponents: [DialogOverviewExampleDialog]
 })
 export class ProductModule { }

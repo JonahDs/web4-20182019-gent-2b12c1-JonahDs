@@ -4,6 +4,7 @@
   margin-left: 10px;
   display: inline-block;
 
+
   .product-image {
     width: 300px;
     height: 300px;
@@ -58,4 +59,11 @@
     position: relative;
   }
 
+}
+
+.product-filter{
+  display: flex;
+  margin-left: 10px;
+  padding-right: 10px;
+  width: 50%;
 }

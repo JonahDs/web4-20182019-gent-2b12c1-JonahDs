@@ -1,5 +1,21 @@
+<div class="product-filter">
+  <p>Filter price</p>
+  <mat-slider
+    style="width: 100%"
+    thumbLabel
+    step="10"
+    min="1"
+    max="2000"
+    (input)="oninputChange($event)"
+  ></mat-slider>
+  <button (click)="oninputChange(0)">Reset</button>
+</div>
+
 <ng-container *ngIf="_loader; else emptyPage">
-  <mat-card *ngFor="let prod of _products" class="product-card">
+  <mat-card
+    *ngFor="let prod of _products | price: (filterAmount$ | async)"
+    class="product-card"
+  >
     <mat-card-header>
       <mat-card-title>
         {{ prod.productName }}
@@ -9,33 +25,33 @@
       </mat-card-subtitle>
     </mat-card-header>
     <div class="product-image">
-        <img
-        class='image'
-        src={{prod.productImage}}
-      />
+      <img class="image" src="{{ prod.productImage }}" />
     </div>
-    
+
     <mat-card-content>
       <div class="product-description">
         {{ prod.productDescription }}
       </div>
-      <button (click)="redirect(prod)">Meer... </button>
-      
+      <button (click)="redirect(prod)">Meer...</button>
     </mat-card-content>
-    <ngb-rating [(rate)]="prod._ratings" [starTemplate]="ngbHearth" [readonly]="false" max="5"></ngb-rating>
-<p>{{prod._ratings}}</p>
+    <ngb-rating
+      [(rate)]="prod._ratings"
+      [starTemplate]="ngbHearth"
+      [readonly]="true"
+      max="5"
+      style="outline:none"
+    ></ngb-rating>
     <mat-card-footer>
       <div class="product-price">&euro; {{ prod.productPrice }}</div>
     </mat-card-footer>
   </mat-card>
 </ng-container>
- 
-<ng-template #ngbHearth let-fill="fill">
-    <span class="star" [class.full]="fill === 100">
-        <span class="half" [style.width.%]="fill">&#10084;</span>&#10084;
-      </span>
-</ng-template>
 
+<ng-template #ngbHearth let-fill="fill">
+  <span (click)= "openDialog()" class="star" [class.full]="fill === 100">
+    <span class="half" [style.width.%]="fill">&#10084;</span>&#10084;
+  </span>
+</ng-template>
 
 <ng-template #emptyPage>
   <div>
