@@ -13,10 +13,10 @@ export class LoginComponent implements OnInit {
   model: any = {};
   errorMessage: string;
 
-  LoginCredential: string;
-  Password: string;
+  loginCredential: string;
+  password: string;
 
-  constructor(private router: Router, private LoginService: LoginService) {}
+  constructor(private router: Router, private loginService: LoginService) {}
 
   ngOnInit() {
     sessionStorage.removeItem('LoginCredential');
@@ -24,17 +24,17 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    if (!this.LoginCredential || !this.Password) {
+    if (!this.loginCredential || !this.password) {
       this.errorMessage = 'LoginCredential or Password is left blank';
       return;
     }
 
-    this.LoginService.login(this.LoginCredential, this.Password).subscribe(
+    this.loginService.login(this.loginCredential, this.password).subscribe(
       value => {
         if (value) {
-          if (this.LoginService.redirectUrl) {
-            this.router.navigateByUrl(this.LoginService.redirectUrl);
-            this.LoginService.redirectUrl = undefined;
+          if (this.loginService.redirectUrl) {
+            this.router.navigateByUrl(this.loginService.redirectUrl);
+            this.loginService.redirectUrl = undefined;
           } else {
             this.router.navigate(['/product']);
           }
@@ -46,11 +46,11 @@ export class LoginComponent implements OnInit {
         console.log(err);
         if (err.error instanceof Error) {
           this.errorMessage = `Error while trying to login user ${
-            this.LoginCredential
+            this.loginCredential
           } `;
         } else {
           this.errorMessage = `Error ${err.status} while trying to login user ${
-            this.LoginCredential
+            this.loginCredential
           } `;
         }
       }

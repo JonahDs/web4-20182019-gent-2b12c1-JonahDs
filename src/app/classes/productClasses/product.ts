@@ -6,7 +6,7 @@ export class Product {
     private _price: number,
     private _image: string,
     private _subCategorie: string,
-    private _ratings: any
+    private _ratings: number[]
   ) {}
 
   static fromJSON(json: any): Product {
@@ -29,6 +29,10 @@ export class Product {
       price: this.productPrice,
       productImage: this._image
     };
+  }
+
+  get ratings(): number[] {
+    return this._ratings;
   }
 
   get productId(): number {

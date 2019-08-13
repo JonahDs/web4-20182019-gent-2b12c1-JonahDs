@@ -31,6 +31,10 @@
 
           <div class="form-group">
             <label>Last Name</label>
+            <div class="input-group mb-4">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="icon-lock"></i></span>
+            </div>
             <input
               type="text"
               formControlName="Lastname"
@@ -45,10 +49,15 @@
                 Last Name is required
               </div>
             </div>
+            </div>
           </div>
 
           <div class="form-group">
             <label>User Name</label>
+            <div class="input-group mb-4">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="icon-lock"></i></span>
+            </div>
             <input
               type="text"
               formControlName="Username"
@@ -63,10 +72,16 @@
                 User Name is required
               </div>
             </div>
+            </div>
           </div>
 
           <div class="form-group">
             <label>Email</label>
+            <div class="input-group mb-4">
+
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="icon-lock"></i></span>
+            </div>
             <input
               type="text"
               formControlName="Email"
@@ -75,6 +90,7 @@
             />
             <div *ngIf="submitted && f.Email?.errors" class="invalid-feedback">
               <div *ngIf="f.Email?.errors.required">Email is required</div>
+            </div>
             </div>
           </div>
 
@@ -85,6 +101,11 @@
                 >6-15 characters containing atleast 1 numeric character</small
               ></label
             >
+            <div class="input-group mb-4">
+
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="icon-lock"></i></span>
+            </div>
             <input
               type="password"
               formControlName="Password"
@@ -99,10 +120,16 @@
                 Password is required
               </div>
             </div>
+            </div>
           </div>
 
           <div class="form-group">
             <label>confirm Password </label>
+            <div class="input-group mb-4">
+
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="icon-lock"></i></span>
+            </div>
             <input
               type="password"
               formControlName="ConfirmPassword"
@@ -118,6 +145,7 @@
               <div *ngIf="f.ConfirmPassword?.errors.required">
                 Confirm Password is required
               </div>
+            </div>
             </div>
           </div>
           <div class="form-group">

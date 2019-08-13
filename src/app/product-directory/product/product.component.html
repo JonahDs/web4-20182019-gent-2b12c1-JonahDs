@@ -1,19 +1,18 @@
-<div class="product-filter">
-  <p>Filter price</p>
-  <mat-slider
-    style="width: 100%"
-    thumbLabel
-    step="10"
-    min="1"
-    max="2000"
-    (input)="oninputChange($event)"
-  ></mat-slider>
-  <button (click)="oninputChange(0)">Reset</button>
-</div>
-
 <ng-container *ngIf="_loader; else emptyPage">
+    <div class="product-filter">
+        <p>Filter price</p>
+        <mat-slider
+          style="width: 100%"
+          thumbLabel
+          step="10"
+          min="1"
+          max="2000"
+          (input)="oninputChange($event)"
+        ></mat-slider>
+        <button (click)="oninputChange(0)" style="border: unset; background: transparent;">Reset</button>
+      </div>
   <mat-card
-    *ngFor="let prod of _products | price: (filterAmount$ | async)"
+    *ngFor="let prod of _products | price: (filterAmount$ | async); index as i"
     class="product-card"
   >
     <mat-card-header>
@@ -32,10 +31,10 @@
       <div class="product-description">
         {{ prod.productDescription }}
       </div>
-      <button (click)="redirect(prod)">Meer...</button>
+      <button (click)="redirect(prod)" mat-button>More...</button>
     </mat-card-content>
     <ngb-rating
-      [(rate)]="prod._ratings"
+      [(rate)]="_avgRating[i]"
       [starTemplate]="ngbHearth"
       [readonly]="true"
       max="5"
@@ -51,14 +50,13 @@
       </span>
     </ng-template>
   </mat-card>
-
-
 </ng-container>
 
 
 
 <ng-template #emptyPage>
-  <div>
-    <p>Loading</p>
+  <div class="center">
+      <p>Looks like you are searching for products? <br>
+      try and select some of the categories to your left.</p>
   </div>
 </ng-template>

@@ -1,5 +1,5 @@
 <h2>Please rate our product</h2>
-<div class="form-group">
+ <div class="form-group">
   <ngb-rating
     [formControl]="form"
     [starTemplate]="ngbHearth"
@@ -8,8 +8,11 @@
     style="outline:none;"
   ></ngb-rating>
 </div>
+ 
 
-<button mat-button [mat-dialog-close]="form.value">Confirm rating</button>
+<button mat-button [mat-dialog-close]="form.value">Confirm</button>
+
+
 
 <ng-template #ngbHearth let-fill="fill">
   <span class="star" [class.full]="fill === 100">

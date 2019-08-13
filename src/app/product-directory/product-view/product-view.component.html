@@ -1,38 +1,67 @@
-<div *ngIf="loader">
+<div class="wrapper" *ngIf="_loader && _productDetail; else loadingError">
   <div class="header">
-    <h1>{{ productDetail.productName }}</h1>
+    <h1 style="margin-bottom: unset;">{{ _productDetail.productName }}</h1>
+    <div class="rating">
+      <ngb-rating
+        [(rate)]="_average"
+        [starTemplate]="ngbHearth"
+        [readonly]="true"
+        max="5"
+        style="outline:none"
+      ></ngb-rating>
+      <span class="rating-amount"
+        >{{ _productDetail.rating.length }} Ratings</span
+      >
+    </div>
   </div>
 
   <div class="detail-body">
     <div class="details-column">
-      <ngb-carousel>
-        <ng-template ngbSlide *ngFor="let img of images">
+      <ngb-carousel [showNavigationIndicators]="false" style="outline: none;">
+        <ng-template ngbSlide *ngFor="let img of _imageArray">
           <div class="carousel-caption"></div>
-          <a href="" target="_blank" rel="nofollow noopener noreferrer">
-            <div class="picsum-img-wrapper">
-              <img [src]="img" alt="" />
-            </div>
-          </a>
+          <div class="img-wrapper">
+            <img [src]="img" alt="" />
+          </div>
         </ng-template>
       </ngb-carousel>
-
-      <div>
-        {{ productDetail.fullText }}
-      </div>
-
-      <div>
-        {{ productDetail.productSpecs }}
-      </div>
     </div>
 
     <div class="details-column">
       <div class="details-price-section">
-        <p>{{ productDetail.productPrice }}</p>
+        <p>&euro; {{ _productDetail.productPrice }}</p>
         <div class="details-buy-button">
-            <button (click)="addToCart(productDetail); clicked = true;" [disabled]="clicked">Add To Cart</button>
-          </div>
+          <button class="btn btn-primary" (click)="addToCart(_productDetail)">
+            Add To Cart
+          </button>
+        </div>
       </div>
-      
+    </div>
+  </div>
+  <div class="detail-tail">
+    <h2>Product Description</h2>
+    <div>
+      {{ _productDetail.fullText }}
+    </div>
+
+    <h2>Product Specifications</h2>
+    <div>
+      {{ _productDetail.productSpecs }}
     </div>
   </div>
 </div>
+
+<ng-template #ngbHearth let-fill="fill">
+  <span class="star" [class.full]="fill === 100">
+    <span class="half" [style.width.%]="fill">&#10084;</span>&#10084;
+  </span>
+</ng-template>
+
+<ng-template #loadingError>
+  <mat-card *ngIf="_loadingerror$ | async as errorMessage; else loading">
+    <img src="../../../assets/img/errors/404-error.jpg" alt="" />
+    <ng-template #loading>
+      <mat-spinner></mat-spinner>
+    </ng-template>
+  </mat-card>
+</ng-template>

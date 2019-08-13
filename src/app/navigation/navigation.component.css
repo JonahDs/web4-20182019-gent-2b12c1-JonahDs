@@ -10,6 +10,16 @@
   background: inherit;
 }
 
+.inputfield {
+  border-radius: 25px;
+  border: transparent;
+  outline: none;
+}
+
+.inputfield[type=text] {
+  padding-left: 10px;
+}
+
 .mat-toolbar.mat-primary {
   position: sticky;
   top: 0;

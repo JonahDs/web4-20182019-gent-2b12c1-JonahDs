@@ -5,7 +5,8 @@ export class ProductDetail {
     public productPrice: number,
     public images: any[],
     public fullText: string,
-    public productSpecs: number
+    public productSpecs: number,
+    public rating: number[]
   ) {}
 
   static fromJSON(json: any): ProductDetail {
@@ -15,7 +16,8 @@ export class ProductDetail {
       json.price,
       json.images,
       json.fullText,
-      json.productSpecs
+      json.productSpecs,
+      json.ratings.map(t => t.rating)
     );
   }
 }

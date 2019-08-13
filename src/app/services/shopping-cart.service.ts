@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-//import { ShoppingCart } from '../classes/shopping-cart';
 
 @Injectable({
   providedIn: 'root'
@@ -10,11 +9,11 @@ export class ShoppingCartService {
   constructor(private http: HttpClient) {}
 
   postShoppingCart(shoppingCart: ShoppingCart) {
-    const umoeder = { username: shoppingCart.username, orderedProducts: [] };
+    const local = { username: shoppingCart.username, orderedProducts: [] };
     shoppingCart.products.forEach((value: number, key: number) => {
-      umoeder.orderedProducts.push(new CartProduct(key, value));
+      local.orderedProducts.push(new CartProduct(key, value));
     });
-    return this.http.post(`${environment.apiUrl}/shoppingcart/`, umoeder);
+    return this.http.post(`${environment.apiUrl}/shoppingcart/`, local);
 
   }
 }

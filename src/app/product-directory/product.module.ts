@@ -8,12 +8,13 @@ import { ShoppingBasketComponent } from './shopping-basket/shopping-basket.compo
 import { PricePipe } from '../ngrx/pipes/price.pipe';
 import { StoreModule } from '@ngrx/store';
 import { filterReducer } from '../ngrx/reducers/filter.reducer';
-import { DialogOverviewExampleDialog } from './rating-dialog/dialog-overview';
+import { DialogOverviewExampleDialogComponent } from './rating-dialog/dialog-overview';
+import { ProductDetailDialogComponent } from './product-detail-dialog/product-detail-dialog';
 
 const routes: Routes = [
   {
     path: 'productDetail/:id',
-    component: ProductViewComponent,
+    component: ProductViewComponent
   },
   {
     path: 'product/:id',
@@ -22,7 +23,8 @@ const routes: Routes = [
       title: 'Product page'
     }
   },
-  {path:'product', component: ProductComponent},
+  { path: 'filter', component: ProductComponent},
+  { path: 'product', component: ProductComponent },
   {
     path: 'basket',
     component: ShoppingBasketComponent
@@ -30,12 +32,23 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [ProductComponent, ProductViewComponent, ShoppingBasketComponent, PricePipe, DialogOverviewExampleDialog],
+  declarations: [
+    ProductComponent,
+    ProductViewComponent,
+    ShoppingBasketComponent,
+    PricePipe,
+    DialogOverviewExampleDialogComponent,
+    ProductDetailDialogComponent
+  ],
   imports: [
     CommonModule,
     MaterialModule,
     RouterModule.forChild(routes),
-    StoreModule.forRoot({filter: filterReducer})
-  ], entryComponents: [DialogOverviewExampleDialog]
+    StoreModule.forRoot({ filter: filterReducer })
+  ],
+  entryComponents: [
+    DialogOverviewExampleDialogComponent,
+    ProductDetailDialogComponent
+  ]
 })
-export class ProductModule { }
+export class ProductModule {}

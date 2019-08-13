@@ -3,7 +3,10 @@
 </div>
 <ng-container *ngIf="!checkList(); else emptyCart">
   <div class="shopping-cart">
-    <div *ngFor="let product of _products; let i=index" class="shopping-cart__row">
+    <div
+      *ngFor="let product of _products; let i = index"
+      class="shopping-cart__row"
+    >
       <div class="product">
         <div class="product-image">
           <img src="{{ product.images[0].productImageLocation }}" />
@@ -17,14 +20,12 @@
         <div class="product-actions">
           <div class="product-actions-border">
             <div class="product-action-wrapper">
-
               <div class="product-price">
-                <p>{{ product.productPrice * _amounts[i] }}</p>
+                <p>&euro; {{ product.productPrice * _amounts[i] }}</p>
               </div>
 
               <select
-                (change)="
-                  updateOrderAmount($event.target.value, i)"
+                (change)="updateOrderAmount($event.target.value, i)"
                 class="select-box"
               >
                 <option
@@ -35,7 +36,7 @@
               </select>
 
               <div class="product__actions">
-                <button>Delete Item</button>
+                <button class="btn btn-secondary">Delete Item</button>
               </div>
             </div>
           </div>
@@ -52,11 +53,11 @@
           <tbody>
             <tr>
               <td class="price-description">Total Articles</td>
-              <td class="price">{{ calculatePrice() }}</td>
+              <td class="price">&euro; {{ calculatePrice() }}</td>
             </tr>
             <tr>
-              <td class="price-description">Shopping Cost</td>
-              <td class="price">{{ calculateShipping() }}</td>
+              <td matTooltip="No Shipping cost on 2 different items." class="price-description">Shopping Cost  &#9432;</td>
+              <td class="price">&euro; {{ calculateShipping() }}</td>
             </tr>
           </tbody>
         </table>
@@ -64,12 +65,12 @@
           <tbody>
             <tr class="bordered">
               <td class="price-description">Total Cost</td>
-              <td class="price">{{ caculateTotal() }}</td>
+              <td class="price">&euro; {{ caculateTotal() }}</td>
             </tr>
           </tbody>
         </table>
       </form>
-      <button (click)="sendOrder()" class="submit">Send order</button>
+      <button (click)="sendOrder()" class="submit btn btn-primary">Send order</button>
     </div>
   </div>
 </ng-container>

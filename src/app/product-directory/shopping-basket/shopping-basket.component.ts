@@ -1,13 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { ProductDetail } from 'src/app/classes/productClasses/product-detail';
-import { DataInterchangeService } from 'src/app/services/data-interchange.service';
-import { LoginService } from 'src/app/services/login.service';
-import { ShoppingCartService, ShoppingCart } from 'src/app/services/shopping-cart.service';
+import { Component, OnInit } from "@angular/core";
+import { ProductDetail } from "src/app/classes/productClasses/product-detail";
+import { DataInterchangeService } from "src/app/services/data-interchange.service";
+import { LoginService } from "src/app/services/login.service";
+import {
+  ShoppingCartService,
+  ShoppingCart
+} from "src/app/services/shopping-cart.service";
 
 @Component({
-  selector: 'app-shopping-basket',
-  templateUrl: './shopping-basket.component.html',
-  styleUrls: ['./shopping-basket.component.scss']
+  selector: "app-shopping-basket",
+  templateUrl: "./shopping-basket.component.html",
+  styleUrls: ["./shopping-basket.component.scss"]
 })
 export class ShoppingBasketComponent implements OnInit {
   private _products = new Array<ProductDetail>();
@@ -42,31 +45,36 @@ export class ShoppingBasketComponent implements OnInit {
       number += p.productPrice * this._amounts[index];
     });
     this._total = number;
-    return Math.round(number * 100) / 100;
+    return Math.round(this._total * 100) / 100;
   }
 
   calculateShipping(): number | string {
-    return this._products.length <= 2 ? 5 : 'free';
+    return this._products.length <= 2 ? 5 : "free";
   }
 
   caculateTotal(): number {
-    return typeof this.calculateShipping() === 'number'
-      ? Math.round(this._total + Number(this.calculateShipping()) * 100) / 100
-      : this._total;
+    return typeof this.calculateShipping() === "number"
+      ? Math.round((this._total + Number(this.calculateShipping())) * 100) / 100
+      : Math.round(this._total * 100) / 100;
   }
 
   orderableAmount(n: number): number[] {
     return [...Array(n).keys()];
   }
 
+  testFunction() {
+    console.log("hehe")
+  }
+
   sendOrder(): void {
     const productMap: Map<number, number> = new Map();
 
-
-    for (let i = 0; i < this._products.length; i++ ) {
+    for (let i = 0; i < this._products.length; i++) {
       productMap.set(this._products[i].productdetailId, this._amounts[i]);
     }
 
-    this._shoppingCart.postShoppingCart(new ShoppingCart(this._loggedInUser, productMap)).subscribe();
+    this._shoppingCart
+      .postShoppingCart(new ShoppingCart(this._loggedInUser, productMap))
+      .subscribe();
   }
 }
