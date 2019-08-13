@@ -12,10 +12,10 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class LoginComponent implements OnInit {
   public errorMessage: string;
 
-  private loginCredential: string;
-  private password: string;
+  public loginCredential: string;
+  public password: string;
 
-  constructor(private router: Router, private loginService: LoginService) {}
+  constructor(public router: Router, private loginService: LoginService) {}
 
   ngOnInit() {
     sessionStorage.removeItem('LoginCredential');
