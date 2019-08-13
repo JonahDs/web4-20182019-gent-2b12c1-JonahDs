@@ -4,7 +4,7 @@
 <ng-container *ngIf="!checkList(); else emptyCart">
   <div class="shopping-cart">
     <div
-      *ngFor="let product of _products; let i = index"
+      *ngFor="let product of products; let i = index"
       class="shopping-cart__row"
     >
       <div class="product">
@@ -21,7 +21,7 @@
           <div class="product-actions-border">
             <div class="product-action-wrapper">
               <div class="product-price">
-                <p>&euro; {{ product.productPrice * _amounts[i] }}</p>
+                <p>&euro; {{ product.productPrice * amounts[i] }}</p>
               </div>
 
               <select
@@ -36,7 +36,7 @@
               </select>
 
               <div class="product__actions">
-                <button class="btn btn-secondary">Delete Item</button>
+                <button class="btn btn-secondary" (click)="deleteFromCart(product)">Delete Item</button>
               </div>
             </div>
           </div>
@@ -79,6 +79,4 @@
   <p>There are no items in your cart currently.</p>
 </ng-template>
 
-<ng-template #calculatedPrice>
-  <p>{{ _productPrice }}</p>
-</ng-template>
+

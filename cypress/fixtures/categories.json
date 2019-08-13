@@ -1,0 +1,44 @@
+[{
+  "categorieId": 1,
+  "categorieName": "Computers",
+  "subCategorieCollection": [{
+    "sCategorieId": 1,
+    "sCategorieName": "Asus"
+  }, {
+    "sCategorieId": 2,
+    "sCategorieName": "HP"
+  }]
+}, {
+  "categorieId": 2,
+  "categorieName": "Phones",
+  "subCategorieCollection": [{
+    "sCategorieId": 3,
+    "sCategorieName": "Motorola"
+  }, {
+    "sCategorieId": 4,
+    "sCategorieName": "Samsung"
+  }, {
+    "sCategorieId": 5,
+    "sCategorieName": "Apple"
+  }]
+}, {
+  "categorieId": 3,
+  "categorieName": "Diswasher",
+  "subCategorieCollection": [{
+    "sCategorieId": 6,
+    "sCategorieName": "Siemens"
+  }, {
+    "sCategorieId": 7,
+    "sCategorieName": "Sharp"
+  }]
+}, {
+  "categorieId": 4,
+  "categorieName": "Gaming",
+  "subCategorieCollection": [{
+    "sCategorieId": 8,
+    "sCategorieName": "Playstation"
+  }, {
+    "sCategorieId": 9,
+    "sCategorieName": "Xbox"
+  }]
+}]

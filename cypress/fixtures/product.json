@@ -1,0 +1,29 @@
+[{
+    "productId": 1,
+    "productName": "Asus ROG Strix GL504GM-ES070T-BE - Gaming laptop - 15.6 inch - Azerty",
+    "productDescription": "With the Asus ROG Gaming GL531GT-AL195T-BE, you can play current games at high settings. The NVIDIA GeForce GTX 1650 video card provides 60+ frames per second for many games. The 120Hz screen creates a smooth transition of frames, even with fast-moving images. Thanks to the 256GB PCIe SSD, levels are loaded much more quickly than with a 'regular' hard drive. This ROG gaming laptop has 16GB of RAM, so running multiple programs while playing a game won't be a problem. To store a montage of your best gaming moments, use the 1TB hard drive. The backlit RGB keyboard makes sure you can also hit those key combinations in low light. With a press on the NumberPad icon on the touchpad, you can switch to a numerical field, so numbers are easier to enter.",
+    "price": 1295.14,
+    "productImage": "https://image.coolblue.be/max/500x500/products/1261128",
+    "subCategorie": {
+      "sCategorieId": 1,
+      "sCategorieName": "Asus"
+    },
+    "productDetail": null,
+    "cartproducts": null,
+    "ratings": []
+  },
+  {
+    "productId": 2,
+    "productName": "Asus ZenBook 14 UX433FA-A5133T-BE - Laptop - 14 Inch - Azerty",
+    "productDescription": "The Asus ZenBook UX410UA-GV298T-BE is a compact 14-inch laptop with which you can get started at home or on the go. The laptop only weighs 1.4 kilograms, so you can easily put it in your bag. With the Zenbook, you can edit photos in Adobe Photoshop, create reports, or watch a video. It's not a problem to run multiple programs at once, either. The Intel Core i5 processor and the 8GB of RAM ensure that everything runs smoothly. The 256GB SSD boots your system within 15 seconds. That means you can get started quickly. Do you want to create a backup? With USB-C, you can transfer files of a few GB in a matter of seconds.",
+    "price": 799.0,
+    "productImage": "https://image.coolblue.be/max/500x500/products/1050410",
+    "subCategorie": {
+      "sCategorieId": 1,
+      "sCategorieName": "Asus"
+    },
+    "productDetail": null,
+    "cartproducts": null,
+    "ratings": []
+  }
+]

@@ -15,33 +15,37 @@ import { Router } from '@angular/router';
   styleUrls: ['./navigation.component.css']
 })
 export class NavigationComponent implements OnInit {
-  private _categories$: Observable<Categorie[]> = this._categorieService
+  public categories$: Observable<Categorie[]> = this._categorieService
     .categories$;
-  private _subcategories: Subcategorie[];
-  private _loggedInUser$ = this._loginService.user$;
-  private isShoppingbag = false;
-  private itemCounter = 0;
-  private _filter$ = new Subject<string>();
+  public subCategories: Subcategorie[];
+  public loggedInUser$ = this._loginService.user$;
+  public isShoppingbag = false;
+  public itemCounter = 0;
+  public filter$ = new Subject<string>();
 
-  isHandset$: Observable<boolean> = this.breakpointObserver
+  public isHandset$: Observable<boolean> = this._breakpointObserver
     .observe(Breakpoints.Handset)
     .pipe(map(result => result.matches));
 
   constructor(
-    private breakpointObserver: BreakpointObserver,
+    private _breakpointObserver: BreakpointObserver,
     private _categorieService: CategorieService,
     private _dataInterchange: DataInterchangeService,
     private _loginService: LoginService,
     private _router: Router
   ) {
-    this._dataInterchange.cart$.subscribe(element => {
-      this.isShoppingbag = true;
-      this.itemCounter++;
+    this._dataInterchange.cart$.subscribe(length => {
+      if (length === 0) {
+        this.isShoppingbag = false;
+      } else {
+        this.isShoppingbag = true;
+        this.itemCounter = length;
+      }
     });
   }
 
   ngOnInit() {
-    this._filter$
+    this.filter$
       .pipe(
         distinctUntilChanged(),
         debounceTime(300)
@@ -56,20 +60,13 @@ export class NavigationComponent implements OnInit {
     this._loginService.logout();
   }
 
-  get categories$(): Observable<Categorie[]> {
-    return this._categories$;
+  public displaySubcategories(value): void {
+    this.subCategories = value.subcategorien;
   }
 
-  subcategories(value) {
-    this._subcategories = value.subcategorien;
-  }
-
-  get subcategoriesList(): Subcategorie[] {
-    return this._subcategories;
-  }
-
-  getProductName(name: string) {
-    this._router.navigate([`/product/${name}`]);
-    this._dataInterchange.changeOnInput(name);
+  public navigateRouter(navString: string, navString2?: string): void {
+    navString2
+      ? this._router.navigate([`/${navString}/${navString2}`])
+      : this._router.navigate([`/${navString}`]);
   }
 }

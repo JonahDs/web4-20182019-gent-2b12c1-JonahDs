@@ -11,7 +11,7 @@ import { filterReducer } from '../ngrx/reducers/filter.reducer';
 import { DialogOverviewExampleDialogComponent } from './rating-dialog/dialog-overview';
 import { ProductDetailDialogComponent } from './product-detail-dialog/product-detail-dialog';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: 'productDetail/:id',
     component: ProductViewComponent
@@ -23,7 +23,7 @@ const routes: Routes = [
       title: 'Product page'
     }
   },
-  { path: 'filter', component: ProductComponent},
+  { path: 'filter', component: ProductComponent },
   { path: 'product', component: ProductComponent },
   {
     path: 'basket',

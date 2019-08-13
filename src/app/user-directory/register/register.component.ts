@@ -11,29 +11,35 @@ import { LoginService } from '../../services/login.service';
   styleUrls: ['./register.component.sass']
 })
 export class RegisterComponent implements OnInit {
-
-  data = false;
-  registerform: FormGroup;
-  massage: string;
-  submitted = false;
-  errorMessage: string;
+  private _data = false;
+  public registerform: FormGroup;
+  public submitted = false;
+  public errorMessage: string;
 
   constructor(
-    private formbuilder: FormBuilder,
-    private loginService: LoginService,
-    private router: Router
+    private _formBuilder: FormBuilder,
+    private _loginService: LoginService,
+    private _router: Router
   ) {}
 
   ngOnInit() {
-    this.registerform = this.formbuilder.group(
+    this.registerform = this._formBuilder.group(
       {
         Firstname: ['', [Validators.required]],
         Lastname: ['', [Validators.required]],
         Username: ['', [Validators.required]],
         Email: ['', [Validators.required, Validators.email]],
-        Password: ['',
-          [Validators.required, Validators.minLength(6), Validators.pattern('(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{6,15})$')]],
-        ConfirmPassword: ['', [Validators.required]],
+        Password: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(6),
+            Validators.pattern(
+              '(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{6,15})$'
+            )
+          ]
+        ],
+        ConfirmPassword: ['', [Validators.required]]
       },
       {
         validator: this.MustMatch('Password', 'ConfirmPassword')
@@ -41,7 +47,7 @@ export class RegisterComponent implements OnInit {
     );
   }
 
-  MustMatch(controlString: string, confirmString: string) {
+  private MustMatch(controlString: string, confirmString: string): void | any {
     return (formGroup: FormGroup) => {
       const control = formGroup.controls[controlString];
       const matchingControl = formGroup.controls[confirmString];
@@ -64,7 +70,7 @@ export class RegisterComponent implements OnInit {
     return this.registerform.controls;
   }
 
-  onFormSubmit() {
+  public onFormSubmit(): void {
     this.submitted = true;
     if (this.registerform.invalid) {
       return;
@@ -73,18 +79,29 @@ export class RegisterComponent implements OnInit {
     this.RegisterUser(user);
   }
 
-  RegisterUser(register: Register) {
-    this.loginService.register(
-      register.Firstname, register.Lastname, register.Username, register.Email, register.Password).subscribe(() => {
-      this.data = true;
-      this.router.navigate(['/login']);
-    },
-    (err: HttpErrorResponse) => {
-      if (err.error instanceof Error) {
-        this.errorMessage = `Error while trying to create user `;
-      } else {
-        this.errorMessage = `Error ${err.status} while trying to create user `;
-      }
-    });
+  public RegisterUser(register: Register): void {
+    this._loginService
+      .register(
+        register.Firstname,
+        register.Lastname,
+        register.Username,
+        register.Email,
+        register.Password
+      )
+      .subscribe(
+        () => {
+          this._data = true;
+          this._router.navigate(['/login']);
+        },
+        (err: HttpErrorResponse) => {
+          if (err.error instanceof Error) {
+            this.errorMessage = `Error while trying to create user `;
+          } else {
+            this.errorMessage = `Error ${
+              err.status
+            } while trying to create user `;
+          }
+        }
+      );
   }
 }

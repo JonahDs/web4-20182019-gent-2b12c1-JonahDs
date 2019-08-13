@@ -1,4 +1,4 @@
-<ng-container *ngIf="_loader; else emptyPage">
+<ng-container *ngIf="productLoader; else emptyPage">
     <div class="product-filter">
         <p>Filter price</p>
         <mat-slider
@@ -12,7 +12,8 @@
         <button (click)="oninputChange(0)" style="border: unset; background: transparent;">Reset</button>
       </div>
   <mat-card
-    *ngFor="let prod of _products | price: (filterAmount$ | async); index as i"
+    data-cy="productData"
+    *ngFor="let prod of products | price: (filterAmount$ | async); index as i"
     class="product-card"
   >
     <mat-card-header>
@@ -31,10 +32,10 @@
       <div class="product-description">
         {{ prod.productDescription }}
       </div>
-      <button (click)="redirect(prod)" mat-button>More...</button>
+      <button (click)="redirectRouter(prod)" mat-button>More...</button>
     </mat-card-content>
     <ngb-rating
-      [(rate)]="_avgRating[i]"
+      [(rate)]="avgRating[i]"
       [starTemplate]="ngbHearth"
       [readonly]="true"
       max="5"

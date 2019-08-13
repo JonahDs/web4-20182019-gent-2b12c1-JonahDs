@@ -27,7 +27,7 @@ export class LoginService {
     );
   }
 
-  login(loginCredential: string, password: string): Observable<boolean> {
+  public login(loginCredential: string, password: string): Observable<boolean> {
     return this.http
       .post(
         `${environment.apiUrl}/account`,
@@ -47,7 +47,7 @@ export class LoginService {
       );
   }
 
-  register(
+  public register(
     firstname: string,
     lastname: string,
     username: string,
@@ -80,14 +80,14 @@ export class LoginService {
       );
   }
 
-  logout() {
+  public logout(): void {
     if (this._user$.getValue()) {
       localStorage.removeItem('currentUser');
       this._user$.next(null);
     }
   }
 
-  checkUserNameAvailable = (email: string): Observable<boolean> => {
+  public checkUserNameAvailable = (email: string): Observable<boolean> => {
     return this.http.get<boolean>(
       `${environment.apiUrl}/account/checkusername`,
       {

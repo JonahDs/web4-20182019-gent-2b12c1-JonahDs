@@ -16,7 +16,7 @@
         <button
           *ngFor="let cat of categorie"
           mat-menu-item
-          (mouseover)="(subcategories(cat))"
+          (mouseover)="(displaySubcategories(cat))"
           [matMenuTriggerFor]="fcategorieNames"
         >
           {{ cat.name }}
@@ -25,8 +25,8 @@
 
       <mat-menu #fcategorieNames="matMenu">
         <button
-        *ngFor="let subcat of subcategoriesList"
-        (click)="(getProductName(subcat.scategorieNaam))"
+        *ngFor="let subcat of subCategories"
+        (click)="navigateRouter('product',subcat.scategorieNaam)"
         mat-menu-item 
         >
           {{subcat.scategorieNaam}}
@@ -45,19 +45,19 @@
       >
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span (click)="this._router.navigate(['/product'])">AngularProject</span>
+      <span (click)="navigateRouter('product')">Squared</span>
       <span class="fill-gap"></span>
       
-      <input (keyup)="_filter$.next($event.target.value)" class="inputfield" style="width: 40%" type="text">
+      <input (keyup)="filter$.next($event.target.value)" class="inputfield" style="width: 40%" type="text">
       <span class="fill-gap"></span>
 
-      <ng-container *ngIf="(_loggedInUser$ | async) as user; else notLoggedIn">
+      <ng-container *ngIf="(loggedInUser$ | async) as user; else notLoggedIn">
         <span [matMenuTriggerFor]="userOptions" class="user-name">{{user}}</span>
         <mat-menu #userOptions="matMenu">
           <button mat-menu-item (click)="logout()">Logout</button>
         </mat-menu>
         <div class="shopping-basket" [attr.data-quantity]="isShoppingbag ? itemCounter: null"
-        (click)="this._router.navigate(['/basket'])"></div>
+        (click)="navigateRouter('basket')"></div>
 
       </ng-container>
     </mat-toolbar>

@@ -1,25 +1,25 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subject, Observable, Observer } from 'rxjs';
-import { ProductDetail } from '../classes/productClasses/product-detail';
+import { Injectable } from "@angular/core";
+import { BehaviorSubject, Subject, Observable, Observer } from "rxjs";
+import { ProductDetail } from "../classes/productClasses/product-detail";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class DataInterchangeService {
-  private inputSource = new Subject();
-  input = this.inputSource.asObservable();
-
-  public cart$ = new Subject<ProductDetail>();
+  public cart$ = new Subject<number>();
   public cartItems = Array<ProductDetail>();
-
   constructor() {}
 
-  changeOnInput(message: string) {
-    this.inputSource.next(message);
+  public addToCart(product: ProductDetail): void {
+    this.cartItems.push(product);
+    this.cart$.next(this.cartItems.length);
   }
 
-  addToCart(product: ProductDetail) {
-        this.cart$.next(product);
-        this.cartItems.push(product);
+  public removeFromCart(product: ProductDetail): void {
+    const index: number = this.cartItems.indexOf(product, 0);
+    if (index > -1) {
+      this.cartItems.splice(index, 1);
+    }
+    this.cart$.next(this.cartItems.length);
   }
 }

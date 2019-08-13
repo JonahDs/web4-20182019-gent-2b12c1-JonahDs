@@ -1,16 +1,16 @@
-<div class="wrapper" *ngIf="_loader && _productDetail; else loadingError">
+<div class="wrapper" *ngIf="loader && productDetail; else loadingError">
   <div class="header">
-    <h1 style="margin-bottom: unset;">{{ _productDetail.productName }}</h1>
+    <h1 style="margin-bottom: unset;">{{ productDetail.productName }}</h1>
     <div class="rating">
       <ngb-rating
-        [(rate)]="_average"
+        [(rate)]="productDetailAverage"
         [starTemplate]="ngbHearth"
         [readonly]="true"
         max="5"
         style="outline:none"
       ></ngb-rating>
       <span class="rating-amount"
-        >{{ _productDetail.rating.length }} Ratings</span
+        >{{ productDetail.rating.length }} Ratings</span
       >
     </div>
   </div>
@@ -18,7 +18,7 @@
   <div class="detail-body">
     <div class="details-column">
       <ngb-carousel [showNavigationIndicators]="false" style="outline: none;">
-        <ng-template ngbSlide *ngFor="let img of _imageArray">
+        <ng-template ngbSlide *ngFor="let img of imageArray">
           <div class="carousel-caption"></div>
           <div class="img-wrapper">
             <img [src]="img" alt="" />
@@ -29,9 +29,9 @@
 
     <div class="details-column">
       <div class="details-price-section">
-        <p>&euro; {{ _productDetail.productPrice }}</p>
+        <p>&euro; {{ productDetail.productPrice }}</p>
         <div class="details-buy-button">
-          <button class="btn btn-primary" (click)="addToCart(_productDetail)">
+          <button class="btn btn-primary" (click)="addToCart(productDetail)">
             Add To Cart
           </button>
         </div>
@@ -41,12 +41,12 @@
   <div class="detail-tail">
     <h2>Product Description</h2>
     <div>
-      {{ _productDetail.fullText }}
+      {{ productDetail.fullText }}
     </div>
 
     <h2>Product Specifications</h2>
     <div>
-      {{ _productDetail.productSpecs }}
+      {{ productDetail.productSpecs }}
     </div>
   </div>
 </div>
@@ -58,7 +58,7 @@
 </ng-template>
 
 <ng-template #loadingError>
-  <mat-card *ngIf="_loadingerror$ | async as errorMessage; else loading">
+  <mat-card *ngIf="loadingerror$ | async as errorMessage; else loading">
     <img src="../../../assets/img/errors/404-error.jpg" alt="" />
     <ng-template #loading>
       <mat-spinner></mat-spinner>

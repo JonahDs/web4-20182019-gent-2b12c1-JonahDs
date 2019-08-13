@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
-import { Router } from '@angular/router';
 
 
 @Component({
@@ -9,8 +8,7 @@ import { Router } from '@angular/router';
 })
 export class ProductDetailDialogComponent {
   constructor(
-    public dialogRef: MatDialogRef<ProductDetailDialogComponent>,
-    private _router: Router
+    public dialogRef: MatDialogRef<ProductDetailDialogComponent>
   ) {}
 
 

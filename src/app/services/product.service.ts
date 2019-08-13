@@ -14,7 +14,7 @@ export class ProductService {
 
   constructor(private http: HttpClient) {}
 
-  products$(subcatName: string): Observable<Product[]> {
+  public products$(subcatName: string): Observable<Product[]> {
     return this.http.get(`${environment.apiUrl}/product/${subcatName}`).pipe(
       catchError(error => {
         this.loadingError$.next(error.statusText);
@@ -24,7 +24,7 @@ export class ProductService {
     );
   }
 
-  productDetails$(productId: string): Observable<ProductDetail> {
+  public productDetails$(productId: string): Observable<ProductDetail> {
     return this.http
       .get(`${environment.apiUrl}/product/productdetail/${productId}`)
       .pipe(
@@ -36,14 +36,14 @@ export class ProductService {
       );
   }
 
-  rateProduct$(productid: number, rating: number) {
+  public rateProduct$(productid: number, rating: number): Observable<Object> {
     return this.http.put(
       `${environment.apiUrl}/product/rate/${productid}/${rating}`,
       {}
     );
   }
 
-  getProductsSearch(query: string): Observable<Product[]> {
+  public getProductsSearch(query: string): Observable<Product[]> {
     return this.http
       .get(`${environment.apiUrl}/product/filterProducts/${query}`)
       .pipe(

@@ -17,13 +17,11 @@ import { errorHandler } from '@angular/platform-browser/src/browser';
   providers: [NgbCarouselConfig]
 })
 export class ProductViewComponent implements OnInit {
-  private _productId: string;
-  private _loader = false;
-  private _productDetail: ProductDetail;
-  private _imageArray: any[] = [];
-  private _average: number;
-  private _loadingerror$ = this._productService.loadingError$;
-
+  public loader = false;
+  public productDetail: ProductDetail;
+  public imageArray: any[] = [];
+  public productDetailAverage: number;
+  public loadingError$ = this._productService.loadingError$;
 
   constructor(
     private _productService: ProductService,
@@ -38,31 +36,34 @@ export class ProductViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._productId = this._activatedRoute.snapshot.paramMap.get('id');
     this._productService
-      .productDetails$(this._productId)
+      .productDetails$(this._activatedRoute.snapshot.paramMap.get('id'))
       .pipe(
         finalize(() => {
-          this._loader = true;
+          this.loader = true;
         })
       )
       .subscribe(entry => {
-        this._productDetail = entry;
-        this.setupImages(this._productDetail.images);
+        this.productDetail = entry;
+        this.setupImages(this.productDetail.images);
         this.setupRating();
       });
   }
 
   private setupImages(array: any[]): void {
-    array.forEach(t => this._imageArray.push(t.productImageLocation));
+    array.forEach(t => this.imageArray.push(t.productImageLocation));
   }
 
   private setupRating(): void {
-    this._productDetail.rating.length === 0 ? null :
-    this._average = (this._productDetail.rating.reduce((previous, current) => previous += current) / this._productDetail.rating.length);
+    this.productDetail.rating.length === 0
+      ? null
+      : (this.productDetailAverage =
+          this.productDetail.rating.reduce(
+            (previous, current) => (previous += current)
+          ) / this.productDetail.rating.length);
   }
 
-  private addToCart(product: ProductDetail): void {
+  public addToCart(product: ProductDetail): void {
     if (this._loginService.user$.getValue()) {
       this._dataInterchange.cartItems.some(
         t => t.productdetailId === product.productdetailId
@@ -72,7 +73,9 @@ export class ProductViewComponent implements OnInit {
           })
         : this._dataInterchange.addToCart(product);
     } else {
-      this._loginService.redirectUrl = `productDetail/${product.productdetailId}`;
+      this._loginService.redirectUrl = `productDetail/${
+        product.productdetailId
+      }`;
       this._router.navigate(['/login']);
     }
   }

@@ -10,11 +10,10 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./login.component.sass']
 })
 export class LoginComponent implements OnInit {
-  model: any = {};
-  errorMessage: string;
+  public errorMessage: string;
 
-  loginCredential: string;
-  password: string;
+  private loginCredential: string;
+  private password: string;
 
   constructor(private router: Router, private loginService: LoginService) {}
 
@@ -23,7 +22,7 @@ export class LoginComponent implements OnInit {
     sessionStorage.clear();
   }
 
-  login() {
+  public login(): void | string {
     if (!this.loginCredential || !this.password) {
       this.errorMessage = 'LoginCredential or Password is left blank';
       return;
