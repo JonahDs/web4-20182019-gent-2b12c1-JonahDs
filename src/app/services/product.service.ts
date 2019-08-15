@@ -1,13 +1,13 @@
-import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { Observable, of, Subject } from "rxjs";
-import { catchError, map } from "rxjs/operators";
-import { environment } from "src/environments/environment";
-import { Product } from "../classes/productClasses/product";
-import { ProductDetail } from "../classes/productClasses/product-detail";
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable, of, Subject } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
+import { Product } from '../classes/productClasses/product';
+import { ProductDetail } from '../classes/productClasses/product-detail';
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class ProductService {
   public loadingError$ = new Subject<string>();

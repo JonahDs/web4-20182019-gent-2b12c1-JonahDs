@@ -1,3 +1,11 @@
+<div  style="width: 100%; text-align: center"  *ngIf="!showMsg">
+  <div class="col-xs-12">
+    <p class="alert alert-success">
+        <strong>Order has been send!</strong> 
+
+    </p>
+  </div>
+</div>
 <div class="title">
   <h1>shopping bag</h1>
 </div>
@@ -14,7 +22,6 @@
         <div class="product-details">
           <div class="product-description">
             <p>{{ product.productName }}</p>
-            <p>rating</p>
           </div>
         </div>
         <div class="product-actions">

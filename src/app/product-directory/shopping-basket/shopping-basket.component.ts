@@ -17,6 +17,7 @@ export class ShoppingBasketComponent implements OnInit {
   public amounts: number[] = [];
   private _total = 0;
   private _loggedInUser: string;
+  public showMsg = false;
 
   constructor(
     private _dataInterchange: DataInterchangeService,
@@ -78,6 +79,13 @@ export class ShoppingBasketComponent implements OnInit {
 
     this._shoppingCart
       .postShoppingCart(new ShoppingCart(this._loggedInUser, productMap))
-      .subscribe();
+      .subscribe((event: any) => {
+        if (event.cartproducts) {
+          this.showMsg = true;
+          setTimeout(() => {
+          location.reload();
+          }, 1500);
+        }
+      });
   }
 }
